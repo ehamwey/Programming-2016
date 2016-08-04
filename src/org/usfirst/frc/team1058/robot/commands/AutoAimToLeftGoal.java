@@ -12,7 +12,7 @@ public class AutoAimToLeftGoal extends Command {
 	NetworkTable dataTable;
 	double leftGoalPositionX;
 	double imageSizeX = 400; // the size of the GRIP RESIZED IMAGE in pixels
-	double goalCenterX = imageSizeX/2;
+	double goalIdealCenterX = imageSizeX/2;
     public AutoAimToLeftGoal() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -31,18 +31,21 @@ public class AutoAimToLeftGoal extends Command {
     	double tolerance = 10;
  // set default value to -1 when no image is returned, so the robot waits for an image position)
     	
-    if((leftGoalPositionX > goalCenterX+0.5*tolerance) || (leftGoalPositionX < goalCenterX-0.5*tolerance)){
+    if((leftGoalPositionX > goalIdealCenterX+0.5*tolerance) || (leftGoalPositionX < goalIdealCenterX-0.5*tolerance)){
     		// if robot is outside of the acceptable goal range....
-    	if(leftGoalPositionX >= (goalCenterX+3*tolerance)){
+    	if(leftGoalPositionX >= (goalIdealCenterX+3*tolerance)){ // if goal is at 230 or greater pixels
     		Robot.drivebase.driveTank(0.3, -0.3);
     	}
-    	if(leftGoalPositionX > (goalCenterX+tolerance) && leftGoalPositionX < (goalCenterX+3*tolerance)){
-    		Robot.drivebase.driveTank(0.15, -0.15);
+    	if(leftGoalPositionX > (goalIdealCenterX+tolerance) && leftGoalPositionX < (goalIdealCenterX+3*tolerance)){
+    		//if goal position is between 210 and 230
+    		Robot.drivebase.driveTank(0.15, 0.15);
     	}
-    	if(leftGoalPositionX <= (goalCenterX-3*tolerance)){
+    	if(leftGoalPositionX <= (goalIdealCenterX-3*tolerance)){
+    		//if goal position is less than 170
     		Robot.drivebase.driveTank(-0.3, 0.3);
     	}
-    	if(leftGoalPositionX < (goalCenterX-tolerance) && leftGoalPositionX > (goalCenterX-3*tolerance)){
+    	if(leftGoalPositionX < (goalIdealCenterX-tolerance) && leftGoalPositionX > (goalIdealCenterX-3*tolerance)){
+    		//if goal position is less than 190 but greater than 170
     		Robot.drivebase.driveTank(-0.15, 0.15);
     	}
     	}
