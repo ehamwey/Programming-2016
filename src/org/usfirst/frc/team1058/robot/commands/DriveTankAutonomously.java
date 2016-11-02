@@ -11,6 +11,7 @@ public class DriveTankAutonomously extends Command {
 	double leftDriveSpeed;
 	double rightDriveSpeed;
 	boolean initType;
+	double driveDuration;
     public DriveTankAutonomously(double leftSpeed, double rightSpeed, double desiredAngle, boolean lengthIsEncCounts, double desiredTime) {
        // left speed and right speed -1 to 1, desired angle for the robot to turn at the start and preserve throughout the movement
     	// set desiredAngle to -1 for no heading preservation
@@ -21,8 +22,12 @@ public class DriveTankAutonomously extends Command {
     	 leftDriveSpeed = leftSpeed;
     	 rightDriveSpeed = rightSpeed;
     	 initType = lengthIsEncCounts;
+    	 driveDuration = desiredTime;
     	requires(Robot.drivebase);
+    	if(!initType){
     	setTimeout(desiredTime);
+    	}
+    
     }
 
     // Called just before this Command runs the first time
@@ -37,7 +42,13 @@ public class DriveTankAutonomously extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(!initType){
     	Robot.drivebase.driveTank(leftDriveSpeed, rightDriveSpeed);
+    	}
+    	if(initType){
+    		
+		Robot.drivebase.driveToEncPosition(driveDuration);
+    	}
     	
     }
 

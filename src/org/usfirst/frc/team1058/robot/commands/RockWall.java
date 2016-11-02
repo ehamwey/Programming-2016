@@ -27,7 +27,7 @@ public class RockWall extends CommandGroup {
         // arm.
      	addParallel(new SetIntakeAngle(1750));
     	addSequential(new WaitCommand(1));
-    	addSequential(new DriveTankAutonomously(-0.8,0.8,0,false,3));
+    	addSequential(new DriveTankAutonomously(-0.8,-0.8,0,false,3));
     	addSequential(new DriveTankAutonomously(0,0,0,false,1));
     }
 }

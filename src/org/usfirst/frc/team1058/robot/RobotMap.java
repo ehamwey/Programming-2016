@@ -23,4 +23,5 @@ public class RobotMap {
     public static int climberHookSolenoidChannel = 1;
     public static int driveBaseShiftSolenoid = 0;
     public static int shooterSolenoidChannel2 = 4;
+    public static int flashlightChannel = 6;
 }

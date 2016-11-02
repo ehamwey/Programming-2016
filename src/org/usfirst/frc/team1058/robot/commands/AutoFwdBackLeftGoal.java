@@ -10,15 +10,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class AutoAimToLeftGoal extends Command {
+public class AutoFwdBackLeftGoal extends Command {
 	NetworkTable dataTable;
-	public static boolean goalLRInRange = false;
+	public static boolean goalFBInRange = false;
 	double[] lfGPXA;
 	double[] defaultvl;
-	double leftGoalPositionX;
-	double imageSizeX = 320; // the size of the GRIP RESIZED IMAGE in pixels
-	double goalIdealCenterX = imageSizeX/2;
-    public AutoAimToLeftGoal() {
+	double leftGoalPositionY;
+	double imageSizeY = 200; // the size of the GRIP RESIZED IMAGE in pixels
+	double goalIdealCenterY = 160;
+    public AutoFwdBackLeftGoal() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivebase);
@@ -47,45 +47,44 @@ public class AutoAimToLeftGoal extends Command {
 	protected void execute() {
     	
     	defaultvl[0] = 1 ;
-    	lfGPXA = dataTable.getNumberArray("centerX", defaultvl); // get the contour-ed goal image 
+    	lfGPXA = dataTable.getNumberArray("centerY", defaultvl); // get the contour-ed goal image 
     	try{
-    	leftGoalPositionX = lfGPXA[0];
+    	leftGoalPositionY = lfGPXA[0];
     	}
     	catch(ArrayIndexOutOfBoundsException e){
     		System.out.println("No goal!");
-    		goalLRInRange = false;
+    		goalFBInRange = true;
     	}
-    	double tolerance = 8
+    	double tolerance = 3
     			;
  // set default value to -1 when no image is returned, so the robot waits for an image position)
-    	SmartDashboard.putNumber("left goal angle", leftGoalPositionX);
-    if((leftGoalPositionX > goalIdealCenterX+0.5*tolerance) || (leftGoalPositionX < goalIdealCenterX-0.5*tolerance)){
-    	goalLRInRange = false;
-    	SmartDashboard.putBoolean("goalLRInRange", false);
-
+    	SmartDashboard.putNumber("left goal angle", leftGoalPositionY);
+    if((leftGoalPositionY > goalIdealCenterY+0.5*tolerance) || (leftGoalPositionY < goalIdealCenterY-0.5*tolerance)){
     		// if robot is outside of the acceptable goal range....
-    	if(leftGoalPositionX >= (goalIdealCenterX+3*tolerance)){ // if goal is at 230 or greater pixels
-    		Robot.drivebase.driveTank(0.35, -0.35);
+    	SmartDashboard.putBoolean("goalFBInRange", false);
+    	if(leftGoalPositionY >= (goalIdealCenterY+3*tolerance)){ // if goal is at 230 or greater pixels
+    		Robot.drivebase.driveTank(-0.35, -0.35);
     		
     	}
-    	if(leftGoalPositionX > (goalIdealCenterX+tolerance) && leftGoalPositionX < (goalIdealCenterX+3*tolerance)){
+    	if(leftGoalPositionY > (goalIdealCenterY+tolerance) && leftGoalPositionY < (goalIdealCenterY+3*tolerance)){
     		//if goal position is between 210 and 230
-    		Robot.drivebase.driveTank(0.22, -0.22);
+    		Robot.drivebase.driveTank(-0.14, -0.14);
     	}
-    	if(leftGoalPositionX <= (goalIdealCenterX-3*tolerance)){
+    	if(leftGoalPositionY <= (goalIdealCenterY-3*tolerance)){
     		//if goal position is less than 170
-    		Robot.drivebase.driveTank(-0.35, 0.35);
+    		Robot.drivebase.driveTank(0.35, 0.35);
     	}
-    	if(leftGoalPositionX < (goalIdealCenterX-tolerance) && leftGoalPositionX > (goalIdealCenterX-3*tolerance)){
+    	if(leftGoalPositionY < (goalIdealCenterY-tolerance) && leftGoalPositionY > (goalIdealCenterY-3*tolerance)){
     		//if goal position is less than 190 but greater than 170
-    		Robot.drivebase.driveTank(-0.22, 0.22);
+    		Robot.drivebase.driveTank(0.14, 0.14);
     	}
     	}
     
     else{
-    	goalLRInRange = true;
-    	SmartDashboard.putBoolean("goalLRInRange", true);
-		    	this.end();
+     	goalFBInRange = true;
+    	SmartDashboard.putBoolean("goalFBInRange", true);
+    	this.end();
+   
     }
     }
 

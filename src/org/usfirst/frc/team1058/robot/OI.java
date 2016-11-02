@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import org.usfirst.frc.team1058.robot.commands.AutoAimNFwdBack;
+import org.usfirst.frc.team1058.robot.commands.AutoAimNFwdBackTwo;
 import org.usfirst.frc.team1058.robot.commands.ClimberFirstStageExtend;
 import org.usfirst.frc.team1058.robot.commands.ClimberFirstStageRetract;
 import org.usfirst.frc.team1058.robot.commands.ClimberSecondStageExtend;
@@ -14,6 +16,7 @@ import org.usfirst.frc.team1058.robot.commands.PrepareToShoot;
 import org.usfirst.frc.team1058.robot.commands.SetIntakeAngle;
 import org.usfirst.frc.team1058.robot.commands.ShiftDriveBase;
 import org.usfirst.frc.team1058.robot.commands.ShootingLoop;
+import org.usfirst.frc.team1058.robot.commands.ShootingLoopTeleWatcher;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -38,7 +41,8 @@ public class OI {
     new JoystickButton(operatorGamepad, 7).whenReleased(new ClimberFirstStageRetract());
     new JoystickButton(operatorGamepad, 6).whenPressed(new ClimberSecondStageExtend());
     new JoystickButton(operatorGamepad, 6).whenReleased(new ClimberSecondStageRetract());
-
+    new JoystickButton(driverGamepad, 8).whileHeld(new AutoAimNFwdBack(false));
+    new JoystickButton(driverGamepad, 7).whileHeld(new AutoAimNFwdBackTwo(false));
     new JoystickButton(operatorGamepad, 8).whileHeld(new ClimberWinch(false));
     new JoystickButton(operatorGamepad, 8).whenReleased(new ClimberWinch(true));
 	}

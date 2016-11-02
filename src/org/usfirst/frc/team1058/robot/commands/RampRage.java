@@ -27,8 +27,8 @@ public class RampRage extends CommandGroup {
         // arm.
      	addParallel(new SetIntakeAngle(1850));
     	addSequential(new WaitCommand(1));
-    	addSequential(new DriveTankAutonomously(-0.8,-0.9,0,false,2));
-    	addSequential(new DriveTankAutonomously(-1,-0.5,0,false,1));
+    	addSequential(new DriveTankAutonomously(-0.8,-0.8,0,false,2));
+    	addSequential(new DriveTankAutonomously(-0.5,-1,0,false,1));
     	addSequential(new DriveTankAutonomously(-0.75,-0.75,0,false,2));
     	addSequential(new DriveTankAutonomously(0,0,0,false,1));
     }

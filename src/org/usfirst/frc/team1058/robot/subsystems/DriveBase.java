@@ -38,6 +38,8 @@ public class DriveBase extends Subsystem {
 			rDTTwo.changeControlMode(CANTalon.TalonControlMode.Follower);
 			
 			rDTTwo.set(RobotMap.rightMotorOne);
+			lDTOne.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+			rDTOne.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 			lDTOne.setPID(p, i, d);
 			rDTOne.setPID(p, i, d);
 			
@@ -57,12 +59,14 @@ public class DriveBase extends Subsystem {
 		lDTTwo.set(RobotMap.leftMotorOne);
 		rDTOne.set(0.5*-rightSpeed);
 		rDTTwo.set(RobotMap.rightMotorOne);
+		Robot.shooter.flashlightOn();
 	}
 	else{
 		lDTOne.set(leftSpeed);
 		lDTTwo.set(RobotMap.leftMotorOne);
 		rDTOne.set(-rightSpeed);
 		rDTTwo.set(RobotMap.rightMotorOne);
+		Robot.shooter.flashlightOff();
 	}
 	if(Robot.oi.driverGamepad.getRightTrigger()){
 		driveBaseShifter.set(true);
@@ -71,6 +75,13 @@ public class DriveBase extends Subsystem {
 		driveBaseShifter.set(false);
 	}
 
+	}
+	
+	public void driveToEncPosition(double encPosition){
+		lDTOne.setSetpoint(encPosition);
+		lDTTwo.set(RobotMap.leftMotorOne);
+		rDTOne.setSetpoint(encPosition);
+		lDTTwo.set(RobotMap.rightMotorOne);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

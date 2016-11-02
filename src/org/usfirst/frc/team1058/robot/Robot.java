@@ -1,6 +1,10 @@
 
 package org.usfirst.frc.team1058.robot;
 
+import org.usfirst.frc.team1058.robot.commands.AutoAimNFwdBack;
+import org.usfirst.frc.team1058.robot.commands.AutoAimNFwdBackTwo;
+import org.usfirst.frc.team1058.robot.commands.AutoAimToLeftGoal;
+import org.usfirst.frc.team1058.robot.commands.AutoFwdBackLeftGoal;
 import org.usfirst.frc.team1058.robot.commands.BallStealMoat;
 import org.usfirst.frc.team1058.robot.commands.LowBarCourtyard;
 import org.usfirst.frc.team1058.robot.commands.LowBarDoubleBreach;
@@ -16,6 +20,7 @@ import org.usfirst.frc.team1058.robot.subsystems.Intake;
 import org.usfirst.frc.team1058.robot.subsystems.IntakeRoller;
 import org.usfirst.frc.team1058.robot.subsystems.Shooter;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -33,7 +38,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
+	
 	public static final DriveBase drivebase = new DriveBase();
 	public static final Intake intake = new Intake();
 	public static final Climber climber = new Climber();
@@ -47,7 +52,11 @@ public class Robot extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
+    public Robot(){
+    
+    }
     public void robotInit() {
+    	
 		oi = new OI();
         chooser = new SendableChooser();
         chooser.addDefault("Low Bar Courtyard", new LowBarCourtyard());
@@ -58,6 +67,10 @@ public class Robot extends IterativeRobot {
         chooser.addObject("France Only", new VoltageOnlyFrance());
         chooser.addObject("Moat BallSteal", new BallStealMoat());
         chooser.addObject("Low Bar High Goal", new LowBarHighGoal());
+        chooser.addObject("AutoAim", new AutoAimToLeftGoal());
+        chooser.addObject("AutoFwdBack", new AutoFwdBackLeftGoal());
+        chooser.addObject("AutoAimNFwdBack", new AutoAimNFwdBack(true));
+        chooser.addObject("AutoAimNFwdBackTwo", new AutoAimNFwdBackTwo(true));
         SmartDashboard.putData("Auto mode", chooser);
     }
 	

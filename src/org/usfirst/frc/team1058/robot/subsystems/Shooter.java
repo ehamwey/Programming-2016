@@ -16,6 +16,7 @@ public class Shooter extends Subsystem {
     // here. Call these from Commands.
 	public Solenoid shooterSolenoid = new Solenoid(RobotMap.shooterSolenoidChannel);
 	public Solenoid shooterSolenoid2 = new Solenoid(RobotMap.shooterSolenoidChannel2);
+	public Solenoid flashlightControl = new Solenoid(RobotMap.flashlightChannel);
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
@@ -28,6 +29,12 @@ public class Shooter extends Subsystem {
     public void retract(){
     	shooterSolenoid.set(false);
     	shooterSolenoid2.set(false);
+    }
+    public void flashlightOn(){
+    	flashlightControl.set(true);
+    }
+    public void flashlightOff(){
+    	flashlightControl.set(false);
     }
 }
 

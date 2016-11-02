@@ -27,7 +27,7 @@ public class LowBarCourtyard extends CommandGroup {
         // arm.
      	addParallel(new SetIntakeAngle(1850));
     	addSequential(new WaitCommand(1));
-    	addSequential(new DriveTankAutonomously(-0.5,-0.6,0,false,4.5));
+    	addSequential(new DriveTankAutonomously(-0.6,-0.6,0,false,4.5));
     	addSequential(new DriveTankAutonomously(0,0,0,false,1));
     }
 }

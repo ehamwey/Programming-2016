@@ -27,6 +27,7 @@ public class ShootingLoop extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	
     		addParallel(new DriveIntakeRoller(-2, 2));
     		addSequential(new WaitCommand(0.5));
     		addSequential(new ShootUp());
