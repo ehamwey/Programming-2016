@@ -64,19 +64,35 @@ public class AutoFwdBackLeftGoal extends Command {
     	SmartDashboard.putBoolean("goalFBInRange", false);
     	if(leftGoalPositionY >= (goalIdealCenterY+(3*tolerance))){ // if goal is at 230 or greater pixels
     		Robot.drivebase.driveTank(-0.35, -0.35);
+    		SmartDashboard.putBoolean("goalFarFwd", true);
+    		SmartDashboard.putBoolean("goalCloseFwd", false);
+    		SmartDashboard.putBoolean("goalCloseBack", false);
+    		SmartDashboard.putBoolean("goalFarBack", false);
     		
     	}
-    	if(leftGoalPositionY > (goalIdealCenterY+tolerance) && leftGoalPositionY < (goalIdealCenterY+tolerance)){
+    	if(leftGoalPositionY > (goalIdealCenterY+tolerance) && leftGoalPositionY < (goalIdealCenterY+(3*tolerance))){
     		//if goal position is between 210 and 230
     		Robot.drivebase.driveTank(-0.14, -0.14);
+    		SmartDashboard.putBoolean("goalFarFwd", false);
+    		SmartDashboard.putBoolean("goalCloseFwd", true);
+    		SmartDashboard.putBoolean("goalCloseBack", false);
+    		SmartDashboard.putBoolean("goalFarBack", false);
     	}
     	if(leftGoalPositionY <= (goalIdealCenterY-(3*tolerance))){
     		//if goal position is less than 170
     		Robot.drivebase.driveTank(0.35, 0.35);
+    		SmartDashboard.putBoolean("goalFarFwd", false);
+    		SmartDashboard.putBoolean("goalCloseFwd", false);
+    		SmartDashboard.putBoolean("goalCloseBack", false);
+    		SmartDashboard.putBoolean("goalFarBack", true);
     	}
-    	if(leftGoalPositionY < (goalIdealCenterY-tolerance) && leftGoalPositionY > (goalIdealCenterY-tolerance)){
+    	if(leftGoalPositionY < (goalIdealCenterY-tolerance) && leftGoalPositionY > (goalIdealCenterY-(3*tolerance))){
     		//if goal position is less than 190 but greater than 170
     		Robot.drivebase.driveTank(0.14, 0.14);
+    		SmartDashboard.putBoolean("goalFarFwd", false);
+    		SmartDashboard.putBoolean("goalCloseFwd", false);
+    		SmartDashboard.putBoolean("goalCloseBack", false);
+    		SmartDashboard.putBoolean("goalFarBack", true);
     	}
     	}
     

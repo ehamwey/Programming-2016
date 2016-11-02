@@ -70,19 +70,34 @@ public class AutoAimToLeftGoal extends Command {
     	SmartDashboard.putBoolean("goalLRInRange", false);
     	if(leftGoalPositionX >= (goalIdealCenterX+(3*tolerance))){ // if goal is very right
     		Robot.drivebase.driveTank(0.35, -0.35);
-    		
+    		SmartDashboard.putBoolean("goalFarRight", true);
+    		SmartDashboard.putBoolean("goalCloseRight", false);
+    		SmartDashboard.putBoolean("goalCloseLeft", false);
+    		SmartDashboard.putBoolean("goalFarLeft", false);
     	}
-    	if(leftGoalPositionX > (goalIdealCenterX+(tolerance)) && leftGoalPositionX < (goalIdealCenterX+tolerance)){
+    	if(leftGoalPositionX > (goalIdealCenterX+(tolerance)) && leftGoalPositionX < (goalIdealCenterX+(3*tolerance))){
     		//if goal position is between slightly right and right
     		Robot.drivebase.driveTank(0.22, -0.22);
+    		SmartDashboard.putBoolean("goalFarRight", false);
+    		SmartDashboard.putBoolean("goalCloseRight", true);
+    		SmartDashboard.putBoolean("goalCloseLeft", false);
+    		SmartDashboard.putBoolean("goalFarLeft", false);
     	}
     	if(leftGoalPositionX <= (goalIdealCenterX-3*(tolerance))){
     		//if goal position is left
     		Robot.drivebase.driveTank(-0.35, 0.35);
+    		SmartDashboard.putBoolean("goalFarRight", false);
+    		SmartDashboard.putBoolean("goalCloseRight", false);
+    		SmartDashboard.putBoolean("goalCloseLeft", false);
+    		SmartDashboard.putBoolean("goalFarLeft", true);
     	}
-    	if(leftGoalPositionX < (goalIdealCenterX-(tolerance)) && leftGoalPositionX > (goalIdealCenterX-tolerance)){
+    	if(leftGoalPositionX < (goalIdealCenterX-(tolerance)) && leftGoalPositionX > (goalIdealCenterX-(3*tolerance))){
     		//if goal position is between slightly left 
     		Robot.drivebase.driveTank(-0.22, 0.22);
+    		SmartDashboard.putBoolean("goalFarRight", false);
+    		SmartDashboard.putBoolean("goalCloseRight", false);
+    		SmartDashboard.putBoolean("goalCloseLeft", true);
+    		SmartDashboard.putBoolean("goalFarLeft", false);
     	}
     	if(leftGoalPositionX == 0){
     		//do nothing, wait for a goal
