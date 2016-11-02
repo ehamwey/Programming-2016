@@ -46,7 +46,7 @@ public class AutoAimToLeftGoal extends Command {
     // Called repeatedly when this Command is scheduled to run
 	protected void execute() {
     	
-    	defaultvl[0] = 1 ;
+    	defaultvl[0] = 0 ;
     	lfGPXA = dataTable.getNumberArray("centerX", defaultvl); // get the contour-ed goal image 
     	try{
     	leftGoalPositionX = lfGPXA[0];
@@ -57,35 +57,36 @@ public class AutoAimToLeftGoal extends Command {
     	}
     	double tolerance = 8
     			;
- // set default value to -1 when no image is returned, so the robot waits for an image position)
     	SmartDashboard.putNumber("left goal angle", leftGoalPositionX);
-    if((leftGoalPositionX > goalIdealCenterX+0.5*tolerance) || (leftGoalPositionX < goalIdealCenterX-0.5*tolerance)){
-    	goalLRInRange = false;
-    	SmartDashboard.putBoolean("goalLRInRange", false);
-
-    		// if robot is outside of the acceptable goal range....
-    	if(leftGoalPositionX >= (goalIdealCenterX+3*tolerance)){ // if goal is at 230 or greater pixels
-    		Robot.drivebase.driveTank(0.35, -0.35);
-    		
-    	}
-    	if(leftGoalPositionX > (goalIdealCenterX+tolerance) && leftGoalPositionX < (goalIdealCenterX+3*tolerance)){
-    		//if goal position is between 210 and 230
-    		Robot.drivebase.driveTank(0.22, -0.22);
-    	}
-    	if(leftGoalPositionX <= (goalIdealCenterX-3*tolerance)){
-    		//if goal position is less than 170
-    		Robot.drivebase.driveTank(-0.35, 0.35);
-    	}
-    	if(leftGoalPositionX < (goalIdealCenterX-tolerance) && leftGoalPositionX > (goalIdealCenterX-3*tolerance)){
-    		//if goal position is less than 190 but greater than 170
-    		Robot.drivebase.driveTank(-0.22, 0.22);
-    	}
+    if((leftGoalPositionX < goalIdealCenterX+(0.5*tolerance)) && (leftGoalPositionX > goalIdealCenterX-(0.5*tolerance))){
+    	goalLRInRange = true;
+    	SmartDashboard.putBoolean("goalLRInRange", true);
+    			this.end();
+   
     	}
     
     else{
-    	goalLRInRange = true;
-    	SmartDashboard.putBoolean("goalLRInRange", true);
-		    	this.end();
+    	goalLRInRange = false;
+    	SmartDashboard.putBoolean("goalLRInRange", false);
+    	if(leftGoalPositionX >= (goalIdealCenterX+(3*tolerance))){ // if goal is very right
+    		Robot.drivebase.driveTank(0.35, -0.35);
+    		
+    	}
+    	if(leftGoalPositionX > (goalIdealCenterX+(tolerance)) && leftGoalPositionX < (goalIdealCenterX+tolerance)){
+    		//if goal position is between slightly right and right
+    		Robot.drivebase.driveTank(0.22, -0.22);
+    	}
+    	if(leftGoalPositionX <= (goalIdealCenterX-3*(tolerance))){
+    		//if goal position is left
+    		Robot.drivebase.driveTank(-0.35, 0.35);
+    	}
+    	if(leftGoalPositionX < (goalIdealCenterX-(tolerance)) && leftGoalPositionX > (goalIdealCenterX-tolerance)){
+    		//if goal position is between slightly left 
+    		Robot.drivebase.driveTank(-0.22, 0.22);
+    	}
+    	if(leftGoalPositionX == 0){
+    		//do nothing, wait for a goal
+    	}
     }
     }
 

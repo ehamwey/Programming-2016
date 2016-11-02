@@ -17,7 +17,7 @@ public class AutoFwdBackLeftGoal extends Command {
 	double[] defaultvl;
 	double leftGoalPositionY;
 	double imageSizeY = 200; // the size of the GRIP RESIZED IMAGE in pixels
-	double goalIdealCenterY = 160;
+	double goalIdealCenterY = 130;
     public AutoFwdBackLeftGoal() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -46,7 +46,7 @@ public class AutoFwdBackLeftGoal extends Command {
     // Called repeatedly when this Command is scheduled to run
 	protected void execute() {
     	
-    	defaultvl[0] = 1 ;
+    	defaultvl[0] = 0 ;
     	lfGPXA = dataTable.getNumberArray("centerY", defaultvl); // get the contour-ed goal image 
     	try{
     	leftGoalPositionY = lfGPXA[0];
@@ -55,26 +55,26 @@ public class AutoFwdBackLeftGoal extends Command {
     		System.out.println("No goal!");
     		goalFBInRange = true;
     	}
-    	double tolerance = 3
+    	double tolerance = 15
     			;
  // set default value to -1 when no image is returned, so the robot waits for an image position)
     	SmartDashboard.putNumber("left goal angle", leftGoalPositionY);
-    if((leftGoalPositionY > goalIdealCenterY+0.5*tolerance) || (leftGoalPositionY < goalIdealCenterY-0.5*tolerance)){
+    if((leftGoalPositionY > goalIdealCenterY+(0.5*tolerance)) || (leftGoalPositionY < goalIdealCenterY-(0.5*tolerance))){
     		// if robot is outside of the acceptable goal range....
     	SmartDashboard.putBoolean("goalFBInRange", false);
-    	if(leftGoalPositionY >= (goalIdealCenterY+3*tolerance)){ // if goal is at 230 or greater pixels
+    	if(leftGoalPositionY >= (goalIdealCenterY+(3*tolerance))){ // if goal is at 230 or greater pixels
     		Robot.drivebase.driveTank(-0.35, -0.35);
     		
     	}
-    	if(leftGoalPositionY > (goalIdealCenterY+tolerance) && leftGoalPositionY < (goalIdealCenterY+3*tolerance)){
+    	if(leftGoalPositionY > (goalIdealCenterY+tolerance) && leftGoalPositionY < (goalIdealCenterY+tolerance)){
     		//if goal position is between 210 and 230
     		Robot.drivebase.driveTank(-0.14, -0.14);
     	}
-    	if(leftGoalPositionY <= (goalIdealCenterY-3*tolerance)){
+    	if(leftGoalPositionY <= (goalIdealCenterY-(3*tolerance))){
     		//if goal position is less than 170
     		Robot.drivebase.driveTank(0.35, 0.35);
     	}
-    	if(leftGoalPositionY < (goalIdealCenterY-tolerance) && leftGoalPositionY > (goalIdealCenterY-3*tolerance)){
+    	if(leftGoalPositionY < (goalIdealCenterY-tolerance) && leftGoalPositionY > (goalIdealCenterY-tolerance)){
     		//if goal position is less than 190 but greater than 170
     		Robot.drivebase.driveTank(0.14, 0.14);
     	}
