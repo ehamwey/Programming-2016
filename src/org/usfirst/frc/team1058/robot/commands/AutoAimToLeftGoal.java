@@ -17,7 +17,7 @@ public class AutoAimToLeftGoal extends Command {
 	double[] defaultvl;
 	double leftGoalPositionX;
 	double imageSizeX = 320; // the size of the GRIP RESIZED IMAGE in pixels
-	double goalIdealCenterX = imageSizeX/2;
+	double goalIdealCenterX = ((imageSizeX/2)+10);
     public AutoAimToLeftGoal() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -55,14 +55,17 @@ public class AutoAimToLeftGoal extends Command {
     		System.out.println("No goal!");
     		goalLRInRange = false;
     	}
-    	double tolerance = 8
+    	double tolerance = 7
     			;
     	SmartDashboard.putNumber("left goal angle", leftGoalPositionX);
     if((leftGoalPositionX < goalIdealCenterX+(0.5*tolerance)) && (leftGoalPositionX > goalIdealCenterX-(0.5*tolerance))){
     	goalLRInRange = true;
     	SmartDashboard.putBoolean("goalLRInRange", true);
     			this.end();
-   
+        		SmartDashboard.putBoolean("goalFarRight", false);
+        		SmartDashboard.putBoolean("goalCloseRight", false);
+        		SmartDashboard.putBoolean("goalCloseLeft", false);
+        		SmartDashboard.putBoolean("goalFarLeft", false);
     	}
     
     else{
@@ -77,7 +80,7 @@ public class AutoAimToLeftGoal extends Command {
     	}
     	if(leftGoalPositionX > (goalIdealCenterX+(tolerance)) && leftGoalPositionX < (goalIdealCenterX+(3*tolerance))){
     		//if goal position is between slightly right and right
-    		Robot.drivebase.driveTank(0.22, -0.22);
+    		Robot.drivebase.driveTank(0.25, -0.25);
     		SmartDashboard.putBoolean("goalFarRight", false);
     		SmartDashboard.putBoolean("goalCloseRight", true);
     		SmartDashboard.putBoolean("goalCloseLeft", false);
@@ -93,7 +96,7 @@ public class AutoAimToLeftGoal extends Command {
     	}
     	if(leftGoalPositionX < (goalIdealCenterX-(tolerance)) && leftGoalPositionX > (goalIdealCenterX-(3*tolerance))){
     		//if goal position is between slightly left 
-    		Robot.drivebase.driveTank(-0.22, 0.22);
+    		Robot.drivebase.driveTank(-0.25, 0.25);
     		SmartDashboard.putBoolean("goalFarRight", false);
     		SmartDashboard.putBoolean("goalCloseRight", false);
     		SmartDashboard.putBoolean("goalCloseLeft", true);

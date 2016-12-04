@@ -20,9 +20,10 @@ public class AutoAimNFwdBackTwo extends CommandGroup {
         //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
     	addParallel(new AutoFwdBackLeftGoal());
-    	addSequential(new WaitCommand(4.5));
+    	addSequential(new WaitCommand(3));
     	addParallel(new AutoAimToLeftGoal());
-    	addSequential(new WaitCommand(3.5));
+    	addSequential(new WaitCommand(3));
+    	addParallel(new AutoFwdBackLeftGoal());
         	
         // A command group will require all of the subsystems that each member
         // would require.

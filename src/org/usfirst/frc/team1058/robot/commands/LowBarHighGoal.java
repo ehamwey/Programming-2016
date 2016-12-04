@@ -26,16 +26,14 @@ public class LowBarHighGoal extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
      	addParallel(new SetIntakeAngle(1850));
-    	addSequential(new WaitCommand(1));
-    	addSequential(new DriveTankAutonomously(-0.3,-0.4,0,false,8.6));
-    	addSequential(new DriveTankAutonomously(0.0, -0.65,0,false,2));
+    	addSequential(new DriveTankAutonomously(-0.7,-0.7,0,false,3.5));
+    	addSequential(new DriveTankAutonomously(0.1, -0.55,0,false,1.0));
     	addParallel(new SetIntakeAngle(-1000));
-    	addSequential(new DriveTankAutonomously(-0.5,-0.65,0,false,0.9));
-    	
-    	addParallel(new DriveTankAutonomously(-0.1, -0.1,0,false,1));
-    	
-    	addSequential(new WaitCommand(0.3));
+    	addSequential(new DriveTankAutonomously(-0.3,-0.3,0,false,1.0));
+    	addParallel(new AutoAimNFwdBackTwo(false));
+    	addSequential(new WaitCommand(6));
     	addSequential(new ShootingLoop());
-    	addSequential(new DriveTankAutonomously(0,0,0,false,1));
+    	addSequential(new SetIntakeAngle(0));
+  
     }
 }

@@ -17,7 +17,7 @@ public class AutoFwdBackLeftGoal extends Command {
 	double[] defaultvl;
 	double leftGoalPositionY;
 	double imageSizeY = 200; // the size of the GRIP RESIZED IMAGE in pixels
-	double goalIdealCenterY = 130;
+	double goalIdealCenterY = 20;
     public AutoFwdBackLeftGoal() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -99,8 +99,12 @@ public class AutoFwdBackLeftGoal extends Command {
     else{
      	goalFBInRange = true;
     	SmartDashboard.putBoolean("goalFBInRange", true);
+    	SmartDashboard.putBoolean("goalFarFwd", false);
+		SmartDashboard.putBoolean("goalCloseFwd", false);
+		SmartDashboard.putBoolean("goalCloseBack", false);
+		SmartDashboard.putBoolean("goalFarBack", false);
     	this.end();
-   
+
     }
     }
 

@@ -59,14 +59,14 @@ public class Robot extends IterativeRobot {
     	
 		oi = new OI();
         chooser = new SendableChooser();
-        chooser.addDefault("Low Bar Courtyard", new LowBarCourtyard());
+        chooser.addObject("Low Bar Courtyard", new LowBarCourtyard());
         chooser.addObject("Low Bar Double Breach", new LowBarDoubleBreach());
         chooser.addObject("Moat", new Moat());
         chooser.addObject("RampRage", new RampRage());
         chooser.addObject("RockWall", new RockWall());
         chooser.addObject("France Only", new VoltageOnlyFrance());
         chooser.addObject("Moat BallSteal", new BallStealMoat());
-        chooser.addObject("Low Bar High Goal", new LowBarHighGoal());
+        chooser.addDefault("Low Bar High Goal", new LowBarHighGoal());
         chooser.addObject("AutoAim", new AutoAimToLeftGoal());
         chooser.addObject("AutoFwdBack", new AutoFwdBackLeftGoal());
         chooser.addObject("AutoAimNFwdBack", new AutoAimNFwdBack(true));
