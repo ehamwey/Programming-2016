@@ -11,7 +11,9 @@ import org.usfirst.frc.team1058.robot.commands.ClimberFirstStageRetract;
 import org.usfirst.frc.team1058.robot.commands.ClimberSecondStageExtend;
 import org.usfirst.frc.team1058.robot.commands.ClimberSecondStageRetract;
 import org.usfirst.frc.team1058.robot.commands.ClimberWinch;
+import org.usfirst.frc.team1058.robot.commands.DriveTankAutonomously;
 import org.usfirst.frc.team1058.robot.commands.ExampleCommand;
+import org.usfirst.frc.team1058.robot.commands.JackJohnsEllipse;
 import org.usfirst.frc.team1058.robot.commands.PrepareToShoot;
 import org.usfirst.frc.team1058.robot.commands.SetIntakeAngle;
 import org.usfirst.frc.team1058.robot.commands.ShiftDriveBase;
@@ -45,6 +47,8 @@ public class OI {
     new JoystickButton(driverGamepad, 7).whileHeld(new AutoAimNFwdBackTwo(false));
     new JoystickButton(operatorGamepad, 8).whileHeld(new ClimberWinch(false));
     new JoystickButton(operatorGamepad, 8).whenReleased(new ClimberWinch(true));
+   new JoystickButton(driverGamepad, 1).whenPressed(new DriveTankAutonomously(0.5,-0.5,0,false,5));
+   new JoystickButton(driverGamepad, 2).whenPressed(new JackJohnsEllipse());
 	}
     
 	

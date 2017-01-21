@@ -7,7 +7,6 @@ import org.usfirst.frc.team1058.robot.commands.IntakeDefaultCommand;
 import org.usfirst.frc.team1058.robot.commands.SetIntakeAngle;
 import org.usfirst.frc.team1058.robot.commands.ShootingLoop;
 
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -23,7 +22,7 @@ public class Intake extends Subsystem {
 
 	// Put methods for controlling this subsystem
     // here. Call these from Commands.
-	public CANTalon intakeAngleTalon = new CANTalon(RobotMap.intakeAngleCANTalon);
+	public com.ctre.CANTalon intakeAngleTalon = new com.ctre.CANTalon(RobotMap.intakeAngleCANTalon);
 
 	
 	public double timesRun;
@@ -39,8 +38,8 @@ public class Intake extends Subsystem {
     }
     
     public void initializeMotors(){
-    	intakeAngleTalon.changeControlMode(CANTalon.TalonControlMode.Position);
-    	intakeAngleTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    	intakeAngleTalon.changeControlMode(com.ctre.CANTalon.TalonControlMode.Position);
+    	intakeAngleTalon.setFeedbackDevice(com.ctre.CANTalon.FeedbackDevice.QuadEncoder);
     	intakeAngleTalon.reverseOutput(true);
     	intakeAngleTalon.setPosition(0);
     	intakeAngleTalon.setSetpoint(0);
@@ -59,11 +58,11 @@ public class Intake extends Subsystem {
 }		
     
     	public void voltageOnlyFrance(){
-    		intakeAngleTalon.changeControlMode(CANTalon.TalonControlMode.Voltage);
+    		intakeAngleTalon.changeControlMode(com.ctre.CANTalon.TalonControlMode.Voltage);
     		intakeAngleTalon.set(-0.5);
     		new WaitCommand(0.5);
     		intakeAngleTalon.set(0);
-    		intakeAngleTalon.changeControlMode(CANTalon.TalonControlMode.Position);
+    		intakeAngleTalon.changeControlMode(com.ctre.CANTalon.TalonControlMode.Position);
     	}
     	
     
