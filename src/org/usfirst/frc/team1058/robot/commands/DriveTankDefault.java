@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DriveTankDefault extends Command {
-
+boolean splitArcadeMode = false;
     public DriveTankDefault() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -24,6 +24,13 @@ public class DriveTankDefault extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(splitArcadeMode){
+        	double rspd = Robot.oi.driverGamepad.getLeftStickY()-Robot.oi.driverGamepad.getRightStickX();
+        	double lspd = Robot.oi.driverGamepad.getLeftStickY()+Robot.oi.driverGamepad.getRightStickX();
+
+        	Robot.drivebase.driveTank(rspd, lspd);
+    	}
+    	else{
     	if(Robot.oi.driverGamepad.getRightBumper() || Robot.oi.driverGamepad.getLeftBumper()){
     	Robot.drivebase.driveTank(-Robot.oi.driverGamepad.getLeftStickY(), -Robot.oi.driverGamepad.getRightStickY());
     	}
@@ -31,7 +38,7 @@ public class DriveTankDefault extends Command {
         	Robot.drivebase.driveTank(Robot.oi.driverGamepad.getRightStickY(), Robot.oi.driverGamepad.getLeftStickY());
 
     	}
-    
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

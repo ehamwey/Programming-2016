@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveBase extends Subsystem {
     
-	com.ctre.CANTalon lDTOne = new com.ctre.CANTalon(RobotMap.leftMotorOne);
+	 com.ctre.CANTalon lDTOne = new com.ctre.CANTalon(RobotMap.leftMotorOne);
 	com.ctre.CANTalon lDTTwo = new com.ctre.CANTalon(RobotMap.leftMotorTwo);
-	com.ctre.CANTalon rDTOne = new com.ctre.CANTalon(RobotMap.rightMotorOne);
+	 com.ctre.CANTalon rDTOne = new com.ctre.CANTalon(RobotMap.rightMotorOne);
 	com.ctre.CANTalon rDTTwo = new com.ctre.CANTalon(RobotMap.rightMotorTwo);
 	double p = 1;
 	double i = 0;

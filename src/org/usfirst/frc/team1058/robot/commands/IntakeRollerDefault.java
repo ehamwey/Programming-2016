@@ -23,6 +23,7 @@ public class IntakeRollerDefault extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    
     	if(Robot.oi.operatorGamepad.getLeftStickY() > 0.1 || Robot.oi.operatorGamepad.getLeftStickY() < -0.1){
         	Robot.intakeRoller.setIntakeSpeed(-0.75*Robot.oi.operatorGamepad.getLeftStickY());
         	SmartDashboard.putBoolean("iszeromode", false);
